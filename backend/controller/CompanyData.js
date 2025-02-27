@@ -27,7 +27,7 @@ const uploadCompanyData = async (req, res) => {
     });
 
     await Company.insertMany(uniqueData);
-    res.json({ message: "CSV data uploaded successfully" });
+    res.status(200).json({ message: "CSV data uploaded successfully" });
   } catch (error) {
     console.log("error in upload data APi", error.message);
     res
@@ -45,14 +45,14 @@ const uploadSingle = async (req, res) => {
     );
 
     if(existingWebsites.has(normalizeWebsite(data.website))){
-      return res.status(401).json({message : 'already present in database'})
+      return res.status(401).json({error : 'already present in database'})
     }
 
     const company = new Company(data);
     await company.save();
-    res.status(200).json({ message: "Company added successfully!" });
+    res.status(200).json({ error : "Company added successfully!" });
   } catch (error) {
-    res.status(500).json({ message: "Error adding company", error: error.message });
+    res.status(500).json({ error : "Error adding company", message: error.message });
   }
 }
 

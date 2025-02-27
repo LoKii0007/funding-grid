@@ -13,7 +13,7 @@ const verifyUser = (req, res, next) => {
     } 
 
     if (!token) {
-      return res.status(401).json({ msg: "Access denied. Not authorized" });
+      return res.status(401).json({ error: "Access denied. Not authorized" });
     }
   
     try {
@@ -21,14 +21,14 @@ const verifyUser = (req, res, next) => {
   
       // Check if the token is expired
       if (decoded.exp * 1000 < Date.now()) { // `exp` is in seconds; convert to ms
-        return res.status(401).json({ msg: "Token expired. Please log in again." });
+        return res.status(401).json({ error: "Token expired. Please log in again." });
       }
   
       req.user = decoded;
       next();
     } catch (error) {
       console.error("Token verification failed:", error);
-      res.status(400).json({ msg: "Invalid token." });
+      res.status(400).json({ error: "Invalid token." });
     }
   };
 

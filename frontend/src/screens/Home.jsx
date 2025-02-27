@@ -55,6 +55,8 @@ const Home = () => {
       if (response.status === 200) {
         setData(response.data.data);
         setTotalCount(response.data.totalCount);
+      }else{
+        toast.error(response.data.error || "Error fetching data");
       }
     } catch (error) {
       toast.error("Error fetching data");

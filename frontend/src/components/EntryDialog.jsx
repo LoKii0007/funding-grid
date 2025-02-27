@@ -57,7 +57,7 @@ export default function EntryDialog({ open, setOpen }) {
         },
       );
       if (res.status !== 200) {
-        toast.error(res.data.message || "error adding data.");
+        toast.error(res.data.error || "error adding data.");
         return;
       }
       toast.success("data added");

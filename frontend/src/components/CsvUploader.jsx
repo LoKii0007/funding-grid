@@ -38,6 +38,8 @@ const CsvUploader = ({}) => {
       if (response.status === 200) {
         toast.success("Data uploaded successfully");
         setCsvData([])
+      }else{
+        toast.error(response.data.error || "Error uploading data");
       }
     } catch (error) {
       toast.error("Error uploading data");
